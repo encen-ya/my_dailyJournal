@@ -16,12 +16,22 @@ class _LihatJurnalPageState extends State<LihatJurnalPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsetsGeometry.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            
+            Expanded(//supaya widget otomatis melebar, menuhin ruang kosong
+              child: ListView.separated(//seperated maksud nya supaya tiap listView otomatis ada garis pemisah
+                itemBuilder: (context, index) => ListTile(//listTile buat menyediakan slot khusus tiap list(kayak WA)
+                  //leading | bisa di kasih foto profil, atau icon. mirip WA letak di kiri
+                  title: Text('Judul indeks ke-$index'),
+                  subtitle: Text('Sub-judul indek ke-$index'),
+                  trailing: Text('Trailing indek ke-$index'),
+                  onTap: () => {},
+                ), separatorBuilder: (context,index) => const Divider(),
+                itemCount: 20,
+              ), 
+            ),
           ],
         ),
       ),
