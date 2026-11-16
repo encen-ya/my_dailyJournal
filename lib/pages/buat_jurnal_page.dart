@@ -91,6 +91,12 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
             _textArea('Kegiatan Pembelajaran', 'Masukkan Kegiatan Pembelajaran'),
             SizedBox(height: 10),
             _textArea('Dimensi Profil Pelajar Pancasila', 'Tuliskan Dimensi Profil Pelajar Pancasila'),
+            SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,//lebar maksimal
+              child: 
+              ElevatedButton(onPressed: () {}, child: Text('Simpan'))//sized box bisa di kasih child
+            )
           ],
           ),
         ),
