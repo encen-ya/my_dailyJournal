@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mydj/data/jurnal.dart';
 
 class LihatJurnalPage extends StatefulWidget {
   const LihatJurnalPage({super.key, required this.title, });
@@ -11,6 +12,11 @@ class LihatJurnalPage extends StatefulWidget {
 class _LihatJurnalPageState extends State<LihatJurnalPage> {
   @override
   Widget build(BuildContext context) {
+    final List<Jurnal> daftarJurnal = [
+      Jurnal(kelas: '3A', mapel: 'Bahasa Indonesia'),
+      Jurnal(kelas: '2A', mapel: 'IPA'),
+      Jurnal(kelas: '4B', mapel: 'IPS'),
+];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -24,12 +30,12 @@ class _LihatJurnalPageState extends State<LihatJurnalPage> {
               child: ListView.separated(//seperated maksud nya supaya tiap listView otomatis ada garis pemisah
                 itemBuilder: (context, index) => ListTile(//listTile buat menyediakan slot khusus tiap list(kayak WA)
                   //leading | bisa di kasih foto profil, atau icon. mirip WA letak di kiri
-                  title: Text('Judul indeks ke-$index'),
-                  subtitle: Text('Sub-judul indek ke-$index'),
-                  trailing: Text('Trailing indek ke-$index'),
-                  onTap: () => {},
+                  title: Text(daftarJurnal[index].kelas),
+                  subtitle: Text(daftarJurnal[index].mapel),
+                  trailing: Text(daftarJurnal[index].createdAt.toString()),
+                  onTap: () {},
                 ), separatorBuilder: (context,index) => const Divider(),
-                itemCount: 20,
+                itemCount: daftarJurnal.length,
               ), 
             ),
           ],
