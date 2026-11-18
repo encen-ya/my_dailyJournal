@@ -1,6 +1,3 @@
-import 'package:mydj/main.dart';
-import 'package:mydj/pages/lihat_jurnal_page.dart';
-
 class Jurnal {
   final DateTime _createdAt;//untuk menyimpan jam simpan
   String kelas;
