@@ -17,9 +17,11 @@ class _LihatJurnalPageState extends State<LihatJurnalPage> {
     final List<Jurnal> daftarJurnal = context.watch<DataProvider>().jurnalTersimpan;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.white,
         title: Text(widget.title),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.all(20),

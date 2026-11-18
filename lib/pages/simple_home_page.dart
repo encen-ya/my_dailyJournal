@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/pages/buat_jurnal_page.dart';
 import 'package:mydj/pages/lihat_jurnal_page.dart';
-
+import 'package:mydj/pages/akun_page.dart';
 class SimpleHomePage extends StatefulWidget {
   const SimpleHomePage({super.key, required this.title});
 
@@ -18,9 +18,13 @@ class _SimpleHomePageState extends State<SimpleHomePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.white,
+        title: Center(child: Text(widget.title)),
+        centerTitle: true,
+        
       ),
       body: Center(
         child: Column(
@@ -44,7 +48,7 @@ class _SimpleHomePageState extends State<SimpleHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text('Akun')),
+                ElevatedButton(onPressed: () {_openAkunJurnal(context);}, child: Text('Akun')),
                 const SizedBox(width: 20),
                 ElevatedButton(onPressed: () {}, child: Text('Tentang Aplikasi'),
                 ),
@@ -68,5 +72,10 @@ class _SimpleHomePageState extends State<SimpleHomePage> {
       context, 
       MaterialPageRoute(builder: (context) => BuatJurnalPage())
       );
+  }
+  void _openAkunJurnal(BuildContext context){
+    Navigator.push(
+    context ,
+    MaterialPageRoute(builder: (context) => AkunPageState()));
   }
 }
