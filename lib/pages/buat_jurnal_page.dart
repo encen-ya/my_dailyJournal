@@ -137,19 +137,26 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
       ),
     ); 
   }
-  void _saveJurnal(BuildContext context){
+  Future<void> _saveJurnal(BuildContext context) async
+  {
     Jurnal jurnal = Jurnal(
       kelas: kelas,
       mapel: mapel,
       jam: jamKe,
       tujuanPembelajaran: tujuanPembelajaran,
-      materiTopikPemebelajaran: materiTopikPembelajaran,
-      kegiatanPemebelajaran: kegiatanPembelajaran,
-      dimensiProfilPelajarPancasila: dimensiProfilPelajarPancasila
+      materiTopikPembelajaran: materiTopikPembelajaran,
+      kegiatanPembelajaran: kegiatanPembelajaran,
+      dimensiProfilPelajarPancasila: dimensiProfilPelajarPancasila,
     );
     DataProvider provider = context.read<DataProvider>();
-    provider.addNew(jurnal);
-
-
+    // Simpan ke SQLite lewat Provider
+    await provider.tambahJurnal(jurnal);
+    // BuildContext dipakai setelah operasi async, jadi harus dicek dulu
+    if (context.mounted)
+    {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Jurnal berhasil disimpan')),
+      );
+    }
   }
 }

@@ -28,6 +28,12 @@ class _VideoPreviewState extends State<VideoPreview> {
   }
   
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _controller.value.isInitialized
     ? AspectRatio(

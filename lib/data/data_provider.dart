@@ -1,17 +1,38 @@
 import 'package:flutter/foundation.dart';
+import 'package:mydj/data/database_helper.dart';
 import 'package:mydj/data/jurnal.dart';
 import 'package:mydj/data/login_info.dart';
 
 class DataProvider extends ChangeNotifier {
-  final List<Jurnal> _jurnalTersimpan = [];
-
-  void addNew(Jurnal jurnal) {
-    _jurnalTersimpan.add(jurnal);
-    notifyListeners();
-  }
+  List<Jurnal> _jurnalTersimpan = [];
 
   List<Jurnal> get jurnalTersimpan {
     return List.unmodifiable(_jurnalTersimpan);
+  }
+
+  // READ: ambil semua jurnal dari database
+  Future<void> muatJurnal() async
+  {
+    final db = await DatabaseHelper.instance.database;
+    final rows = await db.query('jurnal', orderBy: 'id DESC');
+    _jurnalTersimpan = rows.map((row) => Jurnal.fromMap(row)).toList();
+    notifyListeners();
+  }
+
+  // CREATE: simpan jurnal baru, lalu muat ulang daftarnya
+  Future<void> tambahJurnal(Jurnal jurnal) async
+  {
+    final db = await DatabaseHelper.instance.database;
+    await db.insert('jurnal', jurnal.toMap());
+    await muatJurnal();
+  }
+
+  // DELETE: hapus jurnal berdasarkan id, lalu muat ulang daftarnya
+  Future<void> hapusJurnal(int id) async
+  {
+    final db = await DatabaseHelper.instance.database;
+    await db.delete('jurnal', where: 'id = ?', whereArgs: [id]);
+    await muatJurnal();
   }
 
   // Cek sudah login atau belum
