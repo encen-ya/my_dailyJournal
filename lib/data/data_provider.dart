@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mydj/data/jurnal.dart';
+import 'package:mydj/data/login_info.dart';
 
 class DataProvider extends ChangeNotifier {
   final List<Jurnal> _jurnalTersimpan = [];
@@ -11,5 +12,24 @@ class DataProvider extends ChangeNotifier {
 
   List<Jurnal> get jurnalTersimpan {
     return List.unmodifiable(_jurnalTersimpan);
+  }
+
+  // Cek sudah login atau belum
+  Future<bool> isLoggedIn() async
+  {
+    LoginInfo loginInfo = await LoginInfo.fromSharedPreferences();
+    return loginInfo.isLoggedIn;
+  }
+
+  // Simpan informasi sesi ketika login
+  Future<void> saveLoginInfo(String username, String password) async
+  {
+    LoginInfo loginInfo = await LoginInfo.fromSharedPreferences();
+    // Isi
+    loginInfo.username = username;
+    loginInfo.password = password;
+    loginInfo.isLoggedIn = true;
+    // Simpan
+    loginInfo.saveToSharedPreferences();
   }
 }

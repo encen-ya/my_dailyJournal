@@ -76,6 +76,6 @@ class _SimpleHomePageState extends State<SimpleHomePage> {
   void _openAkunJurnal(BuildContext context){
     Navigator.push(
     context ,
-    MaterialPageRoute(builder: (context) => AkunPageState()));
+    MaterialPageRoute(builder: (context) => AkunPage()));
   }
 }

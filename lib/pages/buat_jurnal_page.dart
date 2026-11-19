@@ -3,7 +3,6 @@ import 'package:mydj/components/media_selector.dart';
 import 'package:mydj/data/data_provider.dart';
 import 'package:mydj/data/jurnal.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 class BuatJurnalPage extends StatefulWidget {
   final String title = 'Buat Jurnal';
